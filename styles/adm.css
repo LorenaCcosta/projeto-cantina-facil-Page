@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --primary: #FFC72C;
+    --primary-dark: #E0A526;
+    --bg: #F5F4F2;
+    --bg-soft: #F8F7F4;
+    --text: #222;
+    --muted: #777;
+    --card-bg: #FFFFFF;
+    --border-radius: 14px;
+    --shadow-soft: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* ===== LAYOUT GERAL ===== */
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+/* ===== MENU LATERAL ===== */
+
+nav.menu-lateral {
+    width: 70px;
+    height: 100vh;
+    background-color: #FFFFFF;
+    padding: 30px 0 30px 0;
+    box-shadow: 3px 0 12px rgba(0,0,0,0.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+nav.menu-lateral.expandir {
+    width: 220px;
+}
+
+.btn-expadir {
+    width: 100%;
+    padding: 0 18px 24px;
+}
+
+.btn-expadir > i {
+    color: #000;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Lista de itens do menu */
+nav.menu-lateral ul {
+    list-style: none;
+    flex: 1;
+}
+
+nav.menu-lateral ul li.menu-item {
+    transition: background-color 0.2s ease;
+    border-radius: 0 20px 20px 0;
+    margin-right: 8px;
+}
+
+nav.menu-lateral ul li.menu-item a {
+    color: #000;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+nav.menu-lateral ul li.menu-item a .material-symbols-outlined {
+    font-size: 28px;
+}
+
+/* Texto do link */
+nav.menu-lateral ul li.menu-item a .text-link {
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+nav.menu-lateral.expandir .text-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Estado ativo e hover */
+nav.menu-lateral ul li.menu-item.ativo,
+nav.menu-lateral ul li.menu-item:hover {
+    background: var(--primary);
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+
+main.conteudo {
+    margin-left: 80px;
+    padding: 32px 32px 32px 32px;
+}
+
+main.conteudo h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+main.conteudo > p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+/* ===== CARDS DO DASHBOARD ===== */
+
+.cards-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 18px 18px 18px;
+    box-shadow: var(--shadow-soft);
+}
+
+.dash-card h2 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.dash-card span {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* ===== FORMULÁRIOS (Produtos) ===== */
+
+section.card h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+#form-produto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px 16px;
+    margin-bottom: 10px;
+}
+
+.linha-form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.linha-form label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.linha-form input[type="text"],
+.linha-form input[type="number"],
+.linha-form input[type="file"],
+.linha-form textarea {
+    border: 1px solid #DDD;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 14px;
+    outline: none;
+    background-color: #FBFAF8;
+    transition: all 0.2s ease;
+}
+
+.linha-form textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+.linha-form input:focus,
+.linha-form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(255,199,44,0.25);
+    background-color: #FFFFFF;
+}
+
+/* Checkbox de disponível */
+.linha-form input[type="checkbox"] {
+    width: auto;
+    margin-right: 6px;
+}
+
+/* Botões do formulario */
+#form-produto button[type="submit"],
+#btn-cancelar-edicao {
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0 16px;
+    transition: all 0.2s ease;
+}
+
+#form-produto button[type="submit"] {
+    background-color: var(--primary);
+    box-shadow: 0 6px 12px rgba(255,199,44,0.35);
+}
+
+#form-produto button[type="submit"]:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+#btn-cancelar-edicao {
+    background-color: #EEE;
+    color: var(--text);
+}
+
+#btn-cancelar-edicao:hover {
+    background-color: #E1E1E1;
+}
+
+/* ===== TABELAS (Produtos e Pedidos) ===== */
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.tabela thead {
+    background-color: #FFF8DD;
+}
+
+.tabela thead th {
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    border-bottom: 1px solid #EEE0A8;
+}
+
+.tabela tbody tr {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #F0EFEA;
+    transition: background-color 0.15s ease;
+}
+
+.tabela tbody tr:nth-child(even) {
+    background-color: #FBFAF8;
+}
+
+.tabela tbody tr:hover {
+    background-color: #FFF5C7;
+}
+
+.tabela td {
+    padding: 8px 12px;
+    vertical-align: middle;
+}
+
+/* Botões de ação (editar, excluir, status) */
+.tabela button {
+    border: none;
+    border-radius: 999px;
+    padding: 6px 10px;
+    margin: 0 2px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Cores base dos botões de ação */
+.tabela button:nth-child(1) {
+    background-color: #FFF1B3; /* editar / pendente */
+}
+
+.tabela button:nth-child(1):hover {
+    background-color: #FFE47A;
+}
+
+.tabela button:nth-child(2) {
+    background-color: #FFE4C2; /* em preparo */
+}
+
+.tabela button:nth-child(2):hover {
+    background-color: #FFC891;
+}
+
+.tabela button:nth-child(3) {
+    background-color: #C3F2CC; /* pronto */
+}
+
+.tabela button:nth-child(3):hover {
+    background-color: #97E5A7;
+}
+
+.tabela button:nth-child(4) {
+    background-color: #D5D5D5; /* entregue / excluir */
+}
+
+.tabela button:nth-child(4):hover {
+    background-color: #BFBFBF;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 900px) {
+    main.conteudo {
+        margin-left: 70px;
+        padding: 20px 16px;
+    }
+
+    .cards-dashboard {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    nav.menu-lateral {
+        position: fixed;
+        height: 60px;
+        width: 100%;
+        bottom: 0;
+        top: auto;
+        display: flex;
+        padding: 0 8px;
+    }
+
+    nav.menu-lateral ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .btn-expadir {
+        display: none;
+    }
+
+    main.conteudo {
+        margin-left: 0;
+        margin-bottom: 70px;
+    }
+}

@@ -1,0 +1,149 @@
+<!-- web/pages/produtos.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Produtos</title>
+  <link rel="stylesheet" href="../styles/adm.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+  <!-- Sidebar já existente -->
+  <nav class="menu-lateral">
+    <div class="btn-expadir">
+      <i class="material-symbols-outlined" id="btn-exp">menu</i>
+    </div>
+
+    <ul>
+      <li class="menu-item">
+        <a href="adm.html">
+          <span class="material-symbols-outlined">home</span>
+          <span class="text-link">Início</span>
+        </a>
+      </li>
+
+      <li class="menu-item ativo">
+        <a href="produtos.html">
+          <span class="material-symbols-outlined">receipt_long</span>
+          <span class="text-link">Cardápio</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="pedidos.html">
+          <span class="material-symbols-outlined">takeout_dining_2</span>
+          <span class="text-link">Pedidos</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="conta.html">
+          <span class="material-symbols-outlined">person</span>
+          <span class="text-link">Conta</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="login.html">
+          <span class="material-symbols-outlined">logout</span>
+          <span class="text-link">Sair</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="conteudo">
+    <h1>Gerenciar Produtos</h1>
+
+    <!-- Formulário de cadastro/edição -->
+    <section class="card">
+      <h2>Novo produto / Editar produto</h2>
+      <form id="form-produto">
+        <input type="hidden" id="produto-id" />
+
+        <div class="linha-form">
+          <label>Nome*</label>
+          <input type="text" id="nome" required />
+        </div>
+
+        <div class="linha-form">
+          <label>Categoria*</label>
+          <input type="text" id="categoria" required />
+        </div>
+
+        <div class="linha-form">
+          <label>Preço*</label>
+          <input type="number" id="preco" step="0.01" required />
+        </div>
+
+        <div class="linha-form">
+          <label>Descrição</label>
+          <textarea id="descricao"></textarea>
+        </div>
+
+        <div class="linha-form">
+          <label>Imagem</label>
+          <input type="file" id="imagem" accept="image/*" />
+        </div>
+
+        <div class="linha-form">
+          <label>
+            <input type="checkbox" id="disponivel" checked />
+            Disponível
+          </label>
+        </div>
+
+        <button type="submit">Salvar</button>
+        <button type="button" id="btn-cancelar-edicao" style="display:none;">
+          Cancelar edição
+        </button>
+      </form>
+    </section>
+
+    <!-- Tabela de produtos -->
+    <section class="card">
+      <h2>Lista de produtos</h2>
+      <table class="tabela" id="tabela-produtos">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Disponível</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="lista-produtos">
+          <!-- preenchido via JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script> <!-- script do menu lateral -->
+  <script type="module" src="../js/produtos.js"></script>
+
+  <script type="module">
+import { auth } from "../firebase/firebase-config.js";
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+  }
+});
+
+// Função para botão de sair
+window.logout = () => {
+  signOut(auth).then(() => {
+    window.location.href = "login.html";
+  });
+};
+</script>
+
+</body>
+</html>
